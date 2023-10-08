@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../styles/Theme";
 import { css } from "styled-components";
 
 export const MobileMenu = (props: { menuItems: Array<string> }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const onBurgerBtnClick = () => {
+    setMenuIsOpen(!menuIsOpen);
+  };
   return (
     <StyledMobileMenu>
-      <BurgerButton isOpen={false}>
+      <BurgerButton isOpen={menuIsOpen} onClick={onBurgerBtnClick}>
         <span></span>
       </BurgerButton>
-      <MobileMenuPopup isOpen={false}>
+      <MobileMenuPopup
+        isOpen={menuIsOpen}
+        onClick={() => {
+          setMenuIsOpen(false);
+        }}
+      >
         <ul aria-label="menu" role="menu">
           {props.menuItems.map((elem, i) => {
             return (
